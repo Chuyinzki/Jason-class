@@ -2,16 +2,21 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
 
 /**
  * Created by jvillegas on 10/18/16.
  */
-public class MyHashtable<K,V> {
-    private V[] array;
+public class MyHashtable<K extends Comparable<K> , V> {
+    private ArrayList<LinkedList<NodeObject>> array;
     public static int maxArraySize = 100;
 
     public MyHashtable() {
-        array = (V[]) new Object[maxArraySize];
+        array = new ArrayList<LinkedList<NodeObject>>(maxArraySize);
+        for(int i = 0; i < maxArraySize; i++)
+            array.add(i, new LinkedList<>());
     }
 
     public static int getHash(Object object) {
@@ -41,20 +46,75 @@ public class MyHashtable<K,V> {
     }
 
     public V put(K key, V val) {
+        if(key == null || val == null)
+            throw new NullPointerException("Neither key nor value can be null");
         int hash = getHash(key);
-        V retVal = array[hash];
-        array[hash] = val;
+        V retVal = null;
+        NodeObject toInsert = new NodeObject(key, val);
+        LinkedList<NodeObject> ll = array.get(hash);
+        Iterator<NodeObject> iter = ll.descendingIterator();
+        while(iter.hasNext()){
+            NodeObject cur = iter.next();
+            if(cur.equals(toInsert)){
+                retVal = cur.getValue();
+                iter.remove();
+                break;
+            }
+        }
+        ll.add(toInsert);
         return retVal;
     }
 
     public V get(K key) {
-        return array[getHash(key)];
+        int hash = getHash(key);
+        V retVal = null;
+        LinkedList<NodeObject> ll = array.get(hash);
+        Iterator<NodeObject> iter = ll.descendingIterator();
+        while(iter.hasNext()){
+            NodeObject cur = iter.next();
+            if(cur.getKey().equals(key)){
+                retVal = cur.getValue();
+                break;
+            }
+        }
+        return retVal;
     }
 
     public V remove(K key) {
         int hash = getHash(key);
-        V retVal = array[hash];
-        array[hash] = null;
+        V retVal = null;
+        LinkedList<NodeObject> ll = array.get(hash);
+        Iterator<NodeObject> iter = ll.descendingIterator();
+        while(iter.hasNext()){
+            NodeObject cur = iter.next();
+            if(cur.getKey().equals(key)){
+                retVal = cur.getValue();
+                iter.remove();
+                break;
+            }
+        }
         return retVal;
+    }
+
+    private class NodeObject implements Comparable<NodeObject> {
+        K key;
+        V value;
+        NodeObject(K key, V value){
+            this.key = key;
+            this.value = value;
+        }
+
+        public V getValue(){
+            return value;
+        }
+
+        public K getKey(){
+            return key;
+        }
+
+        @Override
+        public int compareTo(NodeObject o) {
+            return key.compareTo(o.getKey());
+        }
     }
 }
