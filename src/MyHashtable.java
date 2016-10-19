@@ -97,6 +97,7 @@ public class MyHashtable<K extends Comparable<K> , V> {
     }
 
     public void printTable(){
+        int[] sizes = new int[maxArraySize];
         for(int i = 0; i < maxArraySize; i++){
             System.out.println(String.format("-------Printing array node: %d --------", i));
             LinkedList<NodeObject> ll = array.get(i);
@@ -104,8 +105,12 @@ public class MyHashtable<K extends Comparable<K> , V> {
             while(iter.hasNext()){
                 NodeObject cur = iter.next();
                 System.out.println(String.format("Key: %d Value: %d", cur.getKey(), cur.getValue()));
+                sizes[i] = ++sizes[i];
             }
         }
+        System.out.println(String.format("-------Printing array index counts --------"));
+        for(int i = 0; i < sizes.length; i++)
+            System.out.println(String.format("%d : %d", i, sizes[i]));
     }
 
     private class NodeObject implements Comparable<NodeObject> {

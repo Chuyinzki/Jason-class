@@ -4,8 +4,11 @@ import java.security.SecureRandom;
 public class main
 {
     public static void main(String [] args) {
-        runOverrideTest(10000);
-    }
+        MyHashtable<Integer, Integer> woah = createIntTable(1000);
+
+        //runOverrideTest(10000);
+        woah = runDeleteTest(1000);
+        woah.printTable();}
 
     private static void simpleAdditionRemovalTest(){
         MyHashtable<String, Integer> woah = new MyHashtable<>();
@@ -18,9 +21,22 @@ public class main
     private static void runOverrideTest(int length){
         MyHashtable<Integer, Integer> woah = createIntTable(length);
         for(int i = 0; i < length; i++)
-            System.out.println("old value: " + woah.put(i, length - i));
+            System.out.println(String.format("Overwritten value at %d: %d", i, woah.put(i, length - i)));
         for(int i = 0; i < length; i++)
             System.out.println(String.format("%d: %d", i, woah.get(i)));
+    }
+
+    private static MyHashtable<Integer, Integer> runDeleteTest(int length){
+        MyHashtable<Integer, Integer> woah = createIntTable(length);
+        deleteTableValues(woah, length);
+        for(int i = 0; i < length; i++)
+            System.out.println(String.format("%d: %d", i, woah.get(i)));
+        return woah;
+    }
+
+    private static void deleteTableValues(MyHashtable<Integer, Integer> toDelete, int amount){
+        for(int i = 0; i < amount; i++)
+            System.out.println(String.format("Deleted value at %d: %d", i, toDelete.remove(i)));
     }
 
     private static MyHashtable<Integer, Integer> createIntTable(int length){
