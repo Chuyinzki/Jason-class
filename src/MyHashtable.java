@@ -8,7 +8,7 @@ import java.io.ObjectOutputStream;
  */
 public class MyHashtable {
     private Object[] array;
-    private static int maxArraySize = 100;
+    public static int maxArraySize = 100;
 
     public MyHashtable() {
         array = new Object[maxArraySize];
@@ -23,8 +23,10 @@ public class MyHashtable {
             out.writeObject(object);
             out.flush();
             byte[] yourBytes = bos.toByteArray();
-            for(byte yo : yourBytes)
-                num ^= ((int)yo);
+            for(byte yo : yourBytes) {
+                num += ((int) yo);
+                num ^= 3;
+            }
         } finally {
             try {
                 bos.close();
