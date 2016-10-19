@@ -3,7 +3,19 @@ import java.security.SecureRandom;
 
 public class main
 {
-    public static void main(String [] args) throws Exception {
+    public static void main(String [] args) {
+        simpleAdditionRemovalTest();
+    }
+
+    private static void simpleAdditionRemovalTest(){
+        MyHashtable<String, Integer> woah = new MyHashtable<>();
+        woah.put("shiet", 123);
+        System.out.println(woah.get("shiet"));
+        System.out.println(woah.remove("shiet"));
+        System.out.println(woah.get("shiet"));
+    }
+
+    private static void runHashTest(){
         SecureRandom random = new SecureRandom();
         int[] results = new int[MyHashtable.maxArraySize];
         int cuantos = 100000;
