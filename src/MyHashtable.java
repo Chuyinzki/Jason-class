@@ -113,9 +113,9 @@ public class MyHashtable<K extends Comparable<K> , V> {
             System.out.println(String.format("%d : %d", i, sizes[i]));
     }
 
-    private class NodeObject implements Comparable<NodeObject> {
-        K key;
-        V value;
+    private class NodeObject {
+        final K key;
+        final V value;
         NodeObject(K key, V value){
             this.key = key;
             this.value = value;
@@ -127,11 +127,6 @@ public class MyHashtable<K extends Comparable<K> , V> {
 
         public K getKey(){
             return key;
-        }
-
-        @Override
-        public int compareTo(NodeObject o) {
-            return key.compareTo(o.getKey());
         }
 
         public boolean equals(NodeObject o){
