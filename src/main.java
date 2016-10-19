@@ -4,7 +4,7 @@ import java.security.SecureRandom;
 public class main
 {
     public static void main(String [] args) {
-        simpleAdditionRemovalTest();
+        runOverrideTest(10000);
     }
 
     private static void simpleAdditionRemovalTest(){
@@ -13,6 +13,27 @@ public class main
         System.out.println(woah.get("shiet"));
         System.out.println(woah.remove("shiet"));
         System.out.println(woah.get("shiet"));
+    }
+
+    private static void runOverrideTest(int length){
+        MyHashtable<Integer, Integer> woah = createIntTable(length);
+        for(int i = 0; i < length; i++)
+            System.out.println("old value: " + woah.put(i, length - i));
+        for(int i = 0; i < length; i++)
+            System.out.println(String.format("%d: %d", i, woah.get(i)));
+    }
+
+    private static MyHashtable<Integer, Integer> createIntTable(int length){
+        MyHashtable<Integer, Integer> woah = new MyHashtable<>();
+        for(int i = 0; i < length; i++)
+            woah.put(i, i);
+        return woah;
+    }
+
+    private static void runIntTest(int length){
+        MyHashtable<Integer, Integer> woah = createIntTable(length);
+        for(int i = 0; i < length; i++)
+            System.out.println(String.format("%d: %d", i, woah.get(i)));
     }
 
     private static void runHashTest(){

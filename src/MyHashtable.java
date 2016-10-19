@@ -96,6 +96,18 @@ public class MyHashtable<K extends Comparable<K> , V> {
         return retVal;
     }
 
+    public void printTable(){
+        for(int i = 0; i < maxArraySize; i++){
+            System.out.println(String.format("-------Printing array node: %d --------", i));
+            LinkedList<NodeObject> ll = array.get(i);
+            Iterator<NodeObject> iter = ll.descendingIterator();
+            while(iter.hasNext()){
+                NodeObject cur = iter.next();
+                System.out.println(String.format("Key: %d Value: %d", cur.getKey(), cur.getValue()));
+            }
+        }
+    }
+
     private class NodeObject implements Comparable<NodeObject> {
         K key;
         V value;
@@ -115,6 +127,10 @@ public class MyHashtable<K extends Comparable<K> , V> {
         @Override
         public int compareTo(NodeObject o) {
             return key.compareTo(o.getKey());
+        }
+
+        public boolean equals(NodeObject o){
+            return key.equals(o.getKey());
         }
     }
 }
