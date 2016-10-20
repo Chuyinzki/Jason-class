@@ -104,7 +104,7 @@ public class MyHashtable<K extends Comparable<K> , V> {
             Iterator<NodeObject> iter = ll.descendingIterator();
             while(iter.hasNext()){
                 NodeObject cur = iter.next();
-                System.out.println(String.format("Key: %d Value: %d", cur.getKey(), cur.getValue()));
+                System.out.println("Key: " + cur.getKey() + " Value: "+ cur.getValue());
                 sizes[i] = ++sizes[i];
             }
         }
