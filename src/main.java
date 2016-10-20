@@ -5,9 +5,9 @@ public class main
 {
     public static void main(String [] args) {
         MyHashtable<Integer, Integer> woah = createIntTable(1000);
-
+        woah.printTable();
         //runOverrideTest(10000);
-        woah = runDeleteTest(1000);
+        deleteTableValues(woah, 1000);
         woah.printTable();}
 
     private static void simpleAdditionRemovalTest(){
@@ -37,6 +37,7 @@ public class main
     private static void deleteTableValues(MyHashtable<Integer, Integer> toDelete, int amount){
         for(int i = 0; i < amount; i++)
             System.out.println(String.format("Deleted value at %d: %d", i, toDelete.remove(i)));
+        //return toDelete;
     }
 
     private static MyHashtable<Integer, Integer> createIntTable(int length){
