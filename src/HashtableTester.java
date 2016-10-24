@@ -1,14 +1,15 @@
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
-public class HashtableTester
-{
+public class HashtableTester {
+
     public static void main(String [] args) {
         MyHashtable<Integer, Integer> woah = createIntTable(1000);
         woah.printTable();
         //runOverrideTest(10000);
         deleteTableValues(woah, 1000);
-        woah.printTable();}
+        woah.printTable();
+    }
 
     private static void simpleAdditionRemovalTest(){
         MyHashtable<String, Integer> woah = new MyHashtable<>();
