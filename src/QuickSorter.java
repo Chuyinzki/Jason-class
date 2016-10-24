@@ -6,9 +6,7 @@ public class QuickSorter<T extends Comparable<T>> {
     private T[] elements;
 
     public void sort(T[] arr) {
-        if (arr == null || arr.length == 0) {
-            return;
-        }
+        if (arr == null || arr.length == 0) return;
         elements = arr;
         quickSort(0, arr.length - 1);
     }
