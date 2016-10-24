@@ -1,7 +1,7 @@
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
-public class main
+public class HashtableTester
 {
     public static void main(String [] args) {
         MyHashtable<Integer, Integer> woah = createIntTable(1000);
