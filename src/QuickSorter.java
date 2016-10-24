@@ -4,15 +4,13 @@
 public class QuickSorter<T extends Comparable<T>> {
 
     private T[] elements;
-    private int length;
 
     public void sort(T[] arr) {
         if (arr == null || arr.length == 0) {
             return;
         }
         elements = arr;
-        length = arr.length;
-        quickSort(0, length - 1);
+        quickSort(0, arr.length - 1);
     }
 
     private void quickSort(int start, int end) {
