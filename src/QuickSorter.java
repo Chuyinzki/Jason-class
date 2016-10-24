@@ -20,18 +20,9 @@ public class QuickSorter<T extends Comparable<T>> {
         T pivot = elements[start + (end - start) / 2];
         // Divide into two arrays
         while (i <= j) {
-            while (elements[i].compareTo(pivot) < 0) {
-                i++;
-            }
-            while (elements[j].compareTo(pivot) > 0) {
-                j--;
-            }
-            if (i <= j) {
-                swappity(i, j);
-                //move index to next position on both sides
-                i++;
-                j--;
-            }
+            while (elements[i].compareTo(pivot) < 0) i++;
+            while (elements[j].compareTo(pivot) > 0) j--;
+            if (i <= j) swappity(i++, j--);
         }
         // call quickSort() method recursively
         if (start < j)
