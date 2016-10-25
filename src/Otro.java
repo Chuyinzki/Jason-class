@@ -31,7 +31,7 @@ public class Otro {
                 int total = 0;
                 //add top left
                 int topLeft = side * (i - 1) + (j - 1);
-                if(topLeft >= 0)
+                if(topLeft >= 0 && i - 1 >= 0 && j - 1 >= 0)
                     total += toRet[topLeft];
 
                 //add all up
