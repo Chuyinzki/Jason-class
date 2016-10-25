@@ -6,7 +6,7 @@ import java.util.Arrays;
  */
 public class SortTester {
     private static Integer[] arrInt = {7,4,5,3,8,7,4,1,2,4,5,4,9,8,6};
-    private static String[] strings = {"cSuch", "aWhy", "fYo?", "eBitch", "bYou", "dA"};
+    private static String[] strings = {"cSuch", "aWhy", "fYo?", "eShithead", "bYou", "dA"};
     private static URI[] uris = new URI[strings.length];
 
     public static void main(String [] args) throws Exception {

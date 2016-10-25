@@ -15,7 +15,7 @@ public class QuickSorter<T extends Comparable<T>> {
         int i = start;
         int j = end;
         // calculate pivot number, I am taking pivot as middle index number
-        T pivot = elements[start + (end - start) / 2];
+        T pivot = elements[(start + end) / 2];
         // Divide into two arrays
         while (i <= j) {
             while (elements[i].compareTo(pivot) < 0) i++;
