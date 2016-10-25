@@ -29,6 +29,7 @@ public class Otro {
         for (int i = 0; i < side; i++) {
             for (int j = 0; j < side; j++) {
                 int total = 0;
+
                 //add top left
                 int topLeft = side * (i - 1) + (j - 1);
                 if(topLeft >= 0 && i - 1 >= 0 && j - 1 >= 0)
