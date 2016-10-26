@@ -28,24 +28,26 @@ public class Otro {
 
         for (int i = 0; i < side; i++) {
             for (int j = 0; j < side; j++) {
-                int total = 0;
+                int topLeftCount = 0;
+                int upCount = 0;
+                int leftCount = 0;
 
                 //add top left
-                int topLeft = side * (i - 1) + (j - 1);
-                if(topLeft >= 0 && i - 1 >= 0 && j - 1 >= 0)
-                    total += toRet[topLeft];
+                int topLeftIndex = side * (i - 1) + (j - 1);
+                if(topLeftIndex >= 0 && i - 1 >= 0 && j - 1 >= 0)
+                    topLeftCount = toRet[topLeftIndex];
 
                 //add all up
-                for (int p = i - 1; p >= 0; p--) {
-                    total += toSum[side * p + j];
-                }
+                int upIndex = side * (i - 1) + j;
+                if(upIndex >= 0 && i - 1 >= 0 && j >= 0)
+                    upCount = toRet[upIndex];
 
                 //add all left
-                for (int k = j - 1; k >= 0; k--) {
-                    total += toSum[side * i + k];
-                }
+                int leftIndex = side * (i) + j - 1;
+                if(leftIndex >= 0 && i >= 0 && j - 1 >= 0)
+                    leftCount = toRet[leftIndex];
 
-                toRet[side * i + j] = total + toSum[side * i + j];
+                toRet[side * i + j] = topLeftCount + (upCount - topLeftCount) + (leftCount - topLeftCount) + toSum[side * i + j];
             }
         }
         return toRet;
