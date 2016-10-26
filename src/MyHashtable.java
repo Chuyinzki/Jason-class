@@ -1,7 +1,3 @@
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -20,7 +16,7 @@ public class MyHashtable<K extends Comparable<K> , V> {
     }
 
     public static int getHash(Object object) {
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        /*ByteArrayOutputStream bos = new ByteArrayOutputStream();
         ObjectOutput out;
         int num = 69;
         try {
@@ -41,7 +37,8 @@ public class MyHashtable<K extends Comparable<K> , V> {
                 System.out.println("shit, couldn't close");
                 // ignore close exception
             }
-        }
+        }*/
+        int num = object.hashCode();
         return Math.abs(num % maxArraySize);
     }
 
