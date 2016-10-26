@@ -4,24 +4,27 @@
 public class UniqueCharacterSpit {
 
     public static char[] printUniques(char[] arr) {
-        /*MyHashtable<Character, Integer> yoink = new MyHashtable<>();
+        MyHashtable<Character, Integer> yoink = new MyHashtable<>();
 
         for(char c : arr) {
             Integer woah = yoink.get(c);
             yoink.put(c, woah == null ? 1 : ++woah);
         }
 
-        for(char c : arr) {
-            if(yoink.get(c) == 0) {
-                while (list.contains(c))
-                    list.remove(new Character(c));
-            }
+        int size = 0;
+        for(int i = 0; i < arr.length; i++) {
+            if(yoink.get(arr[i]) != 1)
+                arr[i] = ' ';
+            else
+                size++;
         }
 
-        for(char c : list)
-            System.out.print(c + " ");
+        char[] ret = new char[size];
+        int iter = 0;
+        for(char c : arr)
+            if(c != ' ')
+                ret[iter++] = c;
 
-        return list.toArray(new char[list.size()]);*/
-        return new char[5];
+        return ret;
     }
 }
