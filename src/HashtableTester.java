@@ -4,7 +4,7 @@ import java.security.SecureRandom;
 public class HashtableTester {
 
     public static void main(String [] args) {
-        MyHashtable<Integer, String> woah = createIntStringTable(1000);
+        MyHashtable<String, Integer> woah = createIntStringTable(1000);
         woah.printTable();
         //runOverrideTest(10000);
         deleteTableValuess(woah, 1000);
@@ -35,9 +35,9 @@ public class HashtableTester {
         return woah;
     }
 
-    private static void deleteTableValuess(MyHashtable<Integer, String> toDelete, int amount){
+    private static void deleteTableValuess(MyHashtable<String, Integer> toDelete, int amount){
         for(int i = 0; i < amount; i++)
-            System.out.println(String.format("Deleted value at %d: %s", i, toDelete.remove(i)));
+            System.out.println(String.format("Deleted value at %s: %d", i, toDelete.remove("_" + i)));
         //return toDelete;
     }
 
@@ -54,10 +54,10 @@ public class HashtableTester {
         return woah;
     }
 
-    private static MyHashtable<Integer, String> createIntStringTable(int length){
-        MyHashtable<Integer, String> woah = new MyHashtable<>();
+    private static MyHashtable<String, Integer> createIntStringTable(int length){
+        MyHashtable<String, Integer> woah = new MyHashtable<>();
         for(int i = 0; i < length; i++)
-            woah.put(i, "_" + i);
+            woah.put("_" + i, i);
         return woah;
     }
 
