@@ -4,7 +4,7 @@
 public class OtroTester {
 
     public static void main(String[] args) {
-        int[] cube = Otro.generateCube(4);
+        int[] cube = Otro.generateCube(3);
         Otro.printCube(cube);
         Otro.printCube(Otro.getSum(cube));
     }

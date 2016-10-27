@@ -24,7 +24,6 @@ public class Otro {
 
     public static int[] getSum(int[] toSum) {
         int side = (int) Math.sqrt(toSum.length);
-        int[] toRet= new int[toSum.length];
 
         for (int i = 0; i < side; i++) {
             for (int j = 0; j < side; j++) {
@@ -35,21 +34,21 @@ public class Otro {
                 //add top left
                 int topLeftIndex = side * (i - 1) + (j - 1);
                 if(topLeftIndex >= 0 && i - 1 >= 0 && j - 1 >= 0)
-                    topLeftCount = toRet[topLeftIndex];
+                    topLeftCount = toSum[topLeftIndex];
 
                 //add all up
                 int upIndex = side * (i - 1) + j;
                 if(upIndex >= 0 && i - 1 >= 0 && j >= 0)
-                    upCount = toRet[upIndex];
+                    upCount = toSum[upIndex];
 
                 //add all left
                 int leftIndex = side * (i) + j - 1;
                 if(leftIndex >= 0 && i >= 0 && j - 1 >= 0)
-                    leftCount = toRet[leftIndex];
+                    leftCount = toSum[leftIndex];
 
-                toRet[side * i + j] = topLeftCount + (upCount - topLeftCount) + (leftCount - topLeftCount) + toSum[side * i + j];
+                toSum[side * i + j] = topLeftCount + (upCount - topLeftCount) + (leftCount - topLeftCount) + toSum[side * i + j];
             }
         }
-        return toRet;
+        return toSum;
     }
 }
