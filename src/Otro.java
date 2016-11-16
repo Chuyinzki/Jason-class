@@ -15,7 +15,7 @@ public class Otro {
         int side = (int) Math.sqrt(cube.length);
         for(int i = 0; i < side; i++) {
             for (int j = 0; j < side; j++) {
-                System.out.print(String.format("%4d", cube[side * i + j]));
+                System.out.print(String.format("%" + side + "d", cube[side * i + j]));
             }
             System.out.println();
         }
