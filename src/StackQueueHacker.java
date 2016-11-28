@@ -7,7 +7,7 @@ import java.util.Stack;
 public class StackQueueHacker {
 
     public static void main(String[] args) {
-        stacks4();
+        queue1();
     }
 
     private static void stacks1() {
@@ -137,7 +137,7 @@ public class StackQueueHacker {
         System.out.print(0);
     }
 
-    private static void stacks4() {
+    private static void queue1() {
         Scanner in = new Scanner(System.in);
         int instructionCount = in.nextInt();
         Stack<Integer> s1 = new Stack<Integer>();
