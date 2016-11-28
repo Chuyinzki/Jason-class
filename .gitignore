@@ -1,3 +1,5 @@
 .idea/
 Jason's class.iml
 out/
+.DS_Store
+lib/*

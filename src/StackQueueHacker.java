@@ -4,7 +4,7 @@ import java.util.Stack;
 /**
  * Created by jvillegas on 11/17/16.
  */
-public class StacksHacker {
+public class StackQueueHacker {
 
     public static void main(String[] args) {
         stacks4();
@@ -159,4 +159,6 @@ public class StacksHacker {
             }
         }
     }
+
+
 }
