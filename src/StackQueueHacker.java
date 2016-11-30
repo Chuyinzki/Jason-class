@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -64,32 +63,44 @@ public class StackQueueHacker {
         int n2 = in.nextInt();
         int n3 = in.nextInt();
         ArrayList<Integer> h1 = new ArrayList<Integer>(n1);
-        for(int h1_i=0; h1_i < n1; h1_i++){
+        for (int h1_i = 0; h1_i < n1; h1_i++) {
             h1.add(in.nextInt());
         }
         ArrayList<Integer> h2 = new ArrayList<Integer>(n2);
-        for(int h2_i=0; h2_i < n2; h2_i++){
+        for (int h2_i = 0; h2_i < n2; h2_i++) {
             h2.add(in.nextInt());
         }
         ArrayList<Integer> h3 = new ArrayList<Integer>(n3);
-        for(int h3_i=0; h3_i < n3; h3_i++){
-            h2.add(in.nextInt());
+        for (int h3_i = 0; h3_i < n3; h3_i++) {
+            h3.add(in.nextInt());
         }
 
-        Collections.reverse(h1);
-        Collections.reverse(h2);
-        Collections.reverse(h3);
+        for (int iter = h1.size() - 2; iter >= 0; iter--)
+            h1.set(iter, h1.get(iter) + h1.get(iter + 1));
 
-        for(int iter = h1.size() - 2; iter >= 0; iter--)
-            h1.set(iter, h1.get(iter) + h1.get(iter+1));
+        for (int iter = h2.size() - 2; iter >= 0; iter--)
+            h2.set(iter, h2.get(iter) + h2.get(iter + 1));
 
-        for(int iter = h2.size() - 2; iter >= 0; iter--)
-            h1.set(iter, h2.get(iter) + h2.get(iter+1));
+        for (int iter = h3.size() - 2; iter >= 0; iter--)
+            h3.set(iter, h3.get(iter) + h3.get(iter + 1));
 
-        for(int iter = h3.size() - 2; iter >= 0; iter--)
-            h1.set(iter, h3.get(iter) + h3.get(iter+1));
+        while (h1.size() > 0 && h2.size() > 0 && h3.size() > 0) {
+            int h1Last = h1.get(0);
+            int h2Last = h2.get(0);
+            int h3Last = h3.get(0);
+            if (h1Last == h2Last && h2Last == h3Last) {
+                System.out.print(h1Last);
+                return;
+            }
+            if(h1Last >= h2Last && h1Last >= h3Last)
+                h1.remove(0);
+            else if(h2Last >= h3Last && h2Last >= h1Last)
+                h2.remove(0);
+            else
+                h3.remove(0);
 
-
+        }
+        System.out.println(0);
     }
 
     private static void queue1() {
