@@ -1,6 +1,7 @@
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 import java.util.Stack;
-import java.util.StringTokenizer;
 
 /**
  * Created by jvillegas on 11/17/16.
@@ -62,90 +63,33 @@ public class StackQueueHacker {
         int n1 = in.nextInt();
         int n2 = in.nextInt();
         int n3 = in.nextInt();
-
-        if (n1 == 0 || n2 == 0 || n3 == 0) {
-            System.out.print(0);
-            return;
+        ArrayList<Integer> h1 = new ArrayList<Integer>(n1);
+        for(int h1_i=0; h1_i < n1; h1_i++){
+            h1.add(in.nextInt());
         }
-        int s1Size = 0;
-        int s2Size = 0;
-        int s3Size = 0;
-        int largestSize = 0;
-        in.nextLine();
-
-        String line1 = in.nextLine();
-        String line2 = in.nextLine();
-        String line3 = in.nextLine();
-
-        /*int[] temp1 = new int[n1];
-        int[] temp2 = new int[n2];
-        int[] temp3 = new int[n3];
-        for (int i = 0; i < n1; i++) {
-            int temp = in.nextInt();
-            s1Size += temp;
-            temp1[i] = temp;
+        ArrayList<Integer> h2 = new ArrayList<Integer>(n2);
+        for(int h2_i=0; h2_i < n2; h2_i++){
+            h2.add(in.nextInt());
         }
-        for (int i = 0; i < n2; i++) {
-            int temp = in.nextInt();
-            s2Size += temp;
-            temp2[i] = temp;
-        }
-        for (int i = 0; i < n3; i++) {
-            int temp = in.nextInt();
-            s3Size += temp;
-            temp3[i] = temp;
-        }*/
-
-        /*if (s1Size == s2Size && s2Size == s3Size) {
-            System.out.print(s1Size);
-            return;
-        }*/
-
-       /* Stack<Integer> s1 = new Stack<Integer>();
-        for (int i = temp1.length - 1; i >= 0; i--)
-            s1.push(temp1[i]);
-
-        int final2Size = 0;
-        Stack<Integer> s2 = new Stack<Integer>();
-        for (int i = temp2.length - 1; i >= 0; i--) {
-            int woink = temp2[i];
-            s2.push(woink);
-            final2Size += woink;
-            if (final2Size >= s1Size)
-                break;
+        ArrayList<Integer> h3 = new ArrayList<Integer>(n3);
+        for(int h3_i=0; h3_i < n3; h3_i++){
+            h2.add(in.nextInt());
         }
 
-        int final3Size = 0;
-        Stack<Integer> s3 = new Stack<Integer>();
-        for (int i = temp3.length - 1; i >= 0; i--) {
-            int woink = temp3[i];
-            s3.push(woink);
-            final3Size += woink;
-            if (final3Size >= s1Size)
-                break;
-        }*/
-        StringTokenizer tokens1 = new StringTokenizer(line1);
-        StringTokenizer tokens2 = new StringTokenizer(line2);
-        StringTokenizer tokens3 = new StringTokenizer(line3);
+        Collections.reverse(h1);
+        Collections.reverse(h2);
+        Collections.reverse(h3);
+
+        for(int iter = h1.size() - 2; iter >= 0; iter--)
+            h1.set(iter, h1.get(iter) + h1.get(iter+1));
+
+        for(int iter = h2.size() - 2; iter >= 0; iter--)
+            h1.set(iter, h2.get(iter) + h2.get(iter+1));
+
+        for(int iter = h3.size() - 2; iter >= 0; iter--)
+            h1.set(iter, h3.get(iter) + h3.get(iter+1));
 
 
-        while (tokens1.hasMoreTokens() && tokens2.hasMoreTokens() && tokens3.hasMoreTokens()) {
-            if (s1Size <= s2Size && s1Size <= s3Size)
-                while ((s1Size <= s2Size && s1Size <= s3Size && tokens1.hasMoreTokens()))
-                    s1Size += Integer.parseInt(tokens1.nextToken());
-            else if (s2Size <= s3Size)
-                while (s2Size <= s1Size && s2Size <= s3Size && tokens2.hasMoreTokens())
-                    s2Size += Integer.parseInt(tokens2.nextToken());
-            else
-                while (s3Size <= s1Size && s3Size <= s2Size && tokens3.hasMoreTokens())
-                    s3Size += Integer.parseInt(tokens3.nextToken());
-
-
-            if (s1Size == s2Size && s2Size == s3Size)
-                largestSize = s1Size;
-
-        }
-        System.out.print(largestSize);
     }
 
     private static void queue1() {
