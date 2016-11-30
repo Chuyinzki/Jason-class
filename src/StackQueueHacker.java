@@ -8,7 +8,7 @@ import java.util.Stack;
 public class StackQueueHacker {
 
     public static void main(String[] args) {
-        stacks3();
+        stacks4();
     }
 
     private static void stacks1() {
@@ -92,15 +92,47 @@ public class StackQueueHacker {
                 System.out.print(h1Last);
                 return;
             }
-            if(h1Last >= h2Last && h1Last >= h3Last)
+            if (h1Last >= h2Last && h1Last >= h3Last)
                 h1.remove(0);
-            else if(h2Last >= h3Last && h2Last >= h1Last)
+            else if (h2Last >= h3Last && h2Last >= h1Last)
                 h2.remove(0);
             else
                 h3.remove(0);
 
         }
         System.out.println(0);
+    }
+
+    private static void stacks4() {
+        Scanner in = new Scanner(System.in);
+        int instructionCount = in.nextInt();
+        Stack<String> stack = new Stack<String>();
+        String s = "";
+
+        for (int i = 0; i < instructionCount; i++) {
+            int instruction = in.nextInt();
+            if(instruction == 1) {
+                String temp = in.next();
+                s = s + temp;
+                stack.push(temp);
+                stack.push(""+instruction);
+            } else if (instruction == 2) {
+                int toDelete = in.nextInt();
+                String deleted = s.substring(s.length() - toDelete, s.length());
+                s = s.substring(0, s.length() - toDelete);
+                stack.push(deleted);
+                stack.push(""+instruction);
+            } else if (instruction == 3)
+                System.out.println(s.charAt(in.nextInt() - 1));
+            else if(instruction == 4){
+                int prevInstruction = Integer.parseInt(stack.pop());
+                String undoString = stack.pop();
+                if(prevInstruction == 1)
+                    s = s.substring(0, s.length() - undoString.length());
+                else if(prevInstruction == 2)
+                    s += undoString;
+            }
+        }
     }
 
     private static void queue1() {
