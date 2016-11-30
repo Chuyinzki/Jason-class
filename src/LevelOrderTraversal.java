@@ -1,7 +1,11 @@
+import com.sun.tools.javac.util.Pair;
+
+import java.util.LinkedList;
+
 /**
  * Created by jvillegas on 11/30/16.
  */
-public class BadBreadthFirstSearch {
+public class LevelOrderTraversal {
     /*Please use this Google doc to code during your interview. To free your hands for coding, we recommend that you use a headset or a phone with speaker option.
 
 
@@ -46,14 +50,33 @@ public class BadBreadthFirstSearch {
         temp.right = new Node(10);
 
         root.right.right.left = new Node(52);
-        traverse(root);
+//        badTraverse(root);
+        betterTraverse(root);
     }
 
-    public static void traverse(Node root) {
+    public static void badTraverse(Node root) {
         int treeHeight = getTreeHeight(root, 0) + 1;
         for(int i = 0; i < treeHeight; i++){
             levelTraversal(root, 0, i);
             System.out.println();
+        }
+    }
+
+    public static void betterTraverse(Node root) {
+        LinkedList<Pair<Node, Integer>> list = new LinkedList<>();
+        int cur = 0;
+        list.add(new Pair<>(root, 0));
+        while(!list.isEmpty()) {
+            Pair<Node, Integer> current = list.removeFirst();
+            if(current.snd != cur) {
+                cur = current.snd;
+                System.out.println();
+            }
+            System.out.print(current.fst.value + " ");
+            if(current.fst.left != null)
+                list.add(new Pair<>(current.fst.left, current.snd + 1));
+            if(current.fst.right != null)
+                list.add(new Pair<>(current.fst.right, current.snd + 1));
         }
     }
 
