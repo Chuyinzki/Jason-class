@@ -8,7 +8,7 @@ import java.util.Stack;
 public class StackQueueHacker {
 
     public static void main(String[] args) {
-        stacks5();
+        stacks6();
     }
 
     private static void stacks1() {
@@ -111,25 +111,25 @@ public class StackQueueHacker {
 
         for (int i = 0; i < instructionCount; i++) {
             int instruction = in.nextInt();
-            if(instruction == 1) {
+            if (instruction == 1) {
                 String temp = in.next();
                 s = s + temp;
                 stack.push(temp);
-                stack.push(""+instruction);
+                stack.push("" + instruction);
             } else if (instruction == 2) {
                 int toDelete = in.nextInt();
                 String deleted = s.substring(s.length() - toDelete, s.length());
                 s = s.substring(0, s.length() - toDelete);
                 stack.push(deleted);
-                stack.push(""+instruction);
+                stack.push("" + instruction);
             } else if (instruction == 3)
                 System.out.println(s.charAt(in.nextInt() - 1));
-            else if(instruction == 4){
+            else if (instruction == 4) {
                 int prevInstruction = Integer.parseInt(stack.pop());
                 String undoString = stack.pop();
-                if(prevInstruction == 1)
+                if (prevInstruction == 1)
                     s = s.substring(0, s.length() - undoString.length());
-                else if(prevInstruction == 2)
+                else if (prevInstruction == 2)
                     s += undoString;
             }
         }
@@ -138,7 +138,7 @@ public class StackQueueHacker {
     private static void stacks5() {
         Scanner in = new Scanner(System.in);
         int plantCount = in.nextInt();
-        if(plantCount < 2) return;
+        if (plantCount < 2) return;
         Stack<Integer> stackA = new Stack<Integer>();
         Stack<Integer> stackB = new Stack<Integer>();
         boolean changed = false;
@@ -147,9 +147,9 @@ public class StackQueueHacker {
         Integer lastPlant = in.nextInt();
         stackA.push(lastPlant);
         Integer nextPlant;
-        for(int i = 1; i < plantCount; i++) {
+        for (int i = 1; i < plantCount; i++) {
             nextPlant = in.nextInt();
-            if(lastPlant < nextPlant) {
+            if (lastPlant < nextPlant) {
                 changed = true;
                 lastPlant = nextPlant;
             } else {
@@ -159,18 +159,18 @@ public class StackQueueHacker {
         }
         dayCount++;
 
-        while(changed) {
-            if(stackA.size() < 2 && stackB.size() < 2){
+        while (changed) {
+            if (stackA.size() < 2 && stackB.size() < 2) {
                 dayCount++;
                 break;
             }
             changed = false;
-            if(stackA.isEmpty()) {
+            if (stackA.isEmpty()) {
                 lastPlant = stackB.pop();
                 stackA.push(lastPlant);
-                while(!stackB.isEmpty()) {
+                while (!stackB.isEmpty()) {
                     nextPlant = stackB.pop();
-                    if(lastPlant < nextPlant){
+                    if (lastPlant < nextPlant) {
                         changed = true;
                         lastPlant = nextPlant;
                     } else {
@@ -180,9 +180,9 @@ public class StackQueueHacker {
                 }
             } else {
                 lastPlant = stackA.pop();
-                while(!stackA.isEmpty()) {
+                while (!stackA.isEmpty()) {
                     nextPlant = stackA.pop();
-                    if(lastPlant > nextPlant){
+                    if (lastPlant > nextPlant) {
                         changed = true;
                         lastPlant = nextPlant;
                     } else {
@@ -196,6 +196,72 @@ public class StackQueueHacker {
         }
 
         System.out.print(--dayCount);
+    }
+
+    private static void stacks6() {
+        Scanner in = new Scanner(System.in);
+        int platesCount = in.nextInt();
+        int finalIteration = in.nextInt();
+        int iteration = 0;
+        int[] primes = getFirstNPrimes(finalIteration);
+        ArrayList<Stack<Integer>> listOfStacks = new ArrayList<>();
+
+        Stack<Integer> A = new Stack<>();
+        Stack<Integer> Atemp = new Stack<>();
+        for (int i = 0; i < platesCount; i++)
+            A.push(in.nextInt());
+
+        while(iteration < finalIteration) {
+            Stack<Integer> b = new Stack<>();
+            int prime = primes[iteration];
+            if(A.isEmpty()) {
+                while(!Atemp.isEmpty()) {
+                    int plate = Atemp.pop();
+                    if(plate % prime == 0)
+                        b.push(plate);
+                    else
+                        A.push(plate);
+                }
+            } else {
+                while(!A.isEmpty()) {
+                    int plate = A.pop();
+                    if(plate % prime == 0)
+                        b.push(plate);
+                    else
+                        Atemp.push(plate);
+                }
+            }
+            listOfStacks.add(b);
+            iteration++;
+        }
+
+        for(Stack<Integer> stack : listOfStacks)
+            while(!stack.isEmpty())
+                System.out.println(stack.pop());
+        if(A.isEmpty())
+            while(!Atemp.isEmpty())
+                System.out.println(Atemp.pop());
+        else
+            while(!A.isEmpty())
+                System.out.println(A.pop());
+    }
+
+    private static int[] getFirstNPrimes(int n) {
+        int[] ret = new int[n];
+        int count = 0;
+        int num = 2;
+        while (count != n) {
+            boolean prime = true;
+            for (int i = 2; i <= Math.sqrt(num); i++)
+                if (num % i == 0) {
+                    prime = false;
+                    break;
+                }
+            if (prime)
+                ret[count++] = num;
+            num++;
+        }
+        return ret;
     }
 
     private static void queue1() {
@@ -241,6 +307,7 @@ public class StackQueueHacker {
             }
         }
     }*/
+
 
 
 }
