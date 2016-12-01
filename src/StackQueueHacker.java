@@ -8,7 +8,7 @@ import java.util.Stack;
 public class StackQueueHacker {
 
     public static void main(String[] args) {
-        stacks4();
+        stacks5();
     }
 
     private static void stacks1() {
@@ -133,6 +133,69 @@ public class StackQueueHacker {
                     s += undoString;
             }
         }
+    }
+
+    private static void stacks5() {
+        Scanner in = new Scanner(System.in);
+        int plantCount = in.nextInt();
+        if(plantCount < 2) return;
+        Stack<Integer> stackA = new Stack<Integer>();
+        Stack<Integer> stackB = new Stack<Integer>();
+        boolean changed = false;
+        int dayCount = 0;
+
+        Integer lastPlant = in.nextInt();
+        stackA.push(lastPlant);
+        Integer nextPlant;
+        for(int i = 1; i < plantCount; i++) {
+            nextPlant = in.nextInt();
+            if(lastPlant < nextPlant) {
+                changed = true;
+                lastPlant = nextPlant;
+            } else {
+                stackA.push(nextPlant);
+                lastPlant = nextPlant;
+            }
+        }
+        dayCount++;
+
+        while(changed) {
+            if(stackA.size() < 2 && stackB.size() < 2){
+                dayCount++;
+                break;
+            }
+            changed = false;
+            if(stackA.isEmpty()) {
+                lastPlant = stackB.pop();
+                stackA.push(lastPlant);
+                while(!stackB.isEmpty()) {
+                    nextPlant = stackB.pop();
+                    if(lastPlant < nextPlant){
+                        changed = true;
+                        lastPlant = nextPlant;
+                    } else {
+                        stackA.push(nextPlant);
+                        lastPlant = nextPlant;
+                    }
+                }
+            } else {
+                lastPlant = stackA.pop();
+                while(!stackA.isEmpty()) {
+                    nextPlant = stackA.pop();
+                    if(lastPlant > nextPlant){
+                        changed = true;
+                        lastPlant = nextPlant;
+                    } else {
+                        stackB.push(lastPlant);
+                        lastPlant = nextPlant;
+                    }
+                }
+                stackB.push(lastPlant);
+            }
+            dayCount++;
+        }
+
+        System.out.print(--dayCount);
     }
 
     private static void queue1() {
