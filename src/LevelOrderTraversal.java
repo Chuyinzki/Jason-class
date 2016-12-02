@@ -28,11 +28,11 @@ public class LevelOrderTraversal {
 
 
     public static class Node {
-        Integer value;
+        Integer data;
         Node left;
         Node right;
         public Node(int i){
-            value = i;
+            data = i;
         }
     }
 
@@ -51,7 +51,21 @@ public class LevelOrderTraversal {
 
         root.right.right.left = new Node(52);
 //        badTraverse(root);
-        betterTraverse(root);
+//        betterTraverse(root);
+        hackerTraverse(root);
+    }
+
+    public static void hackerTraverse(Node root) {
+        LinkedList<Node> nodes = new LinkedList<Node>();
+        nodes.add(root);
+        while(!nodes.isEmpty()) {
+            Node yolo = nodes.removeFirst();
+            System.out.print(yolo.data + " ");
+            if(yolo.left != null)
+                nodes.add(yolo.left);
+            if(yolo.right != null)
+                nodes.add(yolo.right);
+        }
     }
 
     public static void badTraverse(Node root) {
@@ -72,7 +86,7 @@ public class LevelOrderTraversal {
                 cur = current.snd;
                 System.out.println();
             }
-            System.out.print(current.fst.value + " ");
+            System.out.print(current.fst.data + " ");
             if(current.fst.left != null)
                 list.add(new Pair<>(current.fst.left, current.snd + 1));
             if(current.fst.right != null)
@@ -96,7 +110,7 @@ public class LevelOrderTraversal {
             levelTraversal(root.right, level + 1, levelToPrint);
         }
         else if(levelToPrint == level)
-            System.out.print(root.value + " ");
+            System.out.print(root.data + " ");
 
 
     }
