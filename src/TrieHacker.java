@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class TrieHacker {
 
     public static void main(String[] args) {
-        trie1();
+        trie2();
     }
 
     private static void trie1() {
@@ -52,7 +52,7 @@ public class TrieHacker {
             }
         }
         long endTime = System.currentTimeMillis();
-        System.out.println("This took: " + (endTime - startTime)/1000 + " seconds");
+        System.out.println("This took: " + (endTime - startTime) / 1000 + " seconds");
     }
 
     private static int countEndings(TrieNode node) {
@@ -62,6 +62,44 @@ public class TrieHacker {
         for (TrieNode n : node.children)
             retCount += countEndings(n);
         return retCount;
+    }
+
+    public static void trie2() {
+        Scanner in = new Scanner(System.in);
+        int instructions = in.nextInt();
+        TrieNode root = new TrieNode(null);
+
+        while (instructions-- > 0) {
+            String arg = in.next();
+            TrieNode temp = root;
+            for (int j = 0; j < arg.length(); j++) {
+                char c = arg.charAt(j);
+                if(temp.children.indexOf(new TrieNode('*')) != -1) {
+                    System.out.println("BAD SET");
+                    System.out.print(arg);
+                    return;
+                }
+
+                int index = temp.children.indexOf(new TrieNode(c));
+                if (index != -1) {
+                    temp = temp.children.get(index);
+                } else {
+                    TrieNode node = new TrieNode(c);
+                    temp.children.add(node);
+                    temp = temp.children.get(temp.children.indexOf(node));
+                }
+            }
+            if(temp.children.size() > 0) {
+                System.out.println("BAD SET");
+                System.out.print(arg);
+                return;
+            }
+            int endIndex = temp.children.indexOf(new TrieNode('*'));
+            if (endIndex == -1)
+                temp.children.add(new TrieNode('*'));
+
+        }
+        System.out.print("GOOD SET");
     }
 
     public static class TrieNode {
