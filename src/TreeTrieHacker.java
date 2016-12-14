@@ -67,7 +67,7 @@ public class TreeTrieHacker {
             TrieNode temp = root;
             for (int j = 0; j < arg.length(); j++) {
                 char c = arg.charAt(j);
-                if(temp.children.indexOf(new TrieNode('*')) != -1) {
+                if (temp.children.indexOf(new TrieNode('*')) != -1) {
                     System.out.println("BAD SET");
                     System.out.print(arg);
                     return;
@@ -82,7 +82,7 @@ public class TreeTrieHacker {
                     temp = temp.children.get(temp.children.indexOf(node));
                 }
             }
-            if(temp.children.size() > 0) {
+            if (temp.children.size() > 0) {
                 System.out.println("BAD SET");
                 System.out.print(arg);
                 return;
@@ -118,17 +118,17 @@ public class TreeTrieHacker {
         nodesToDefine.push(root);
         int addCount = in.nextInt();
 
-        while(addCount-- > 0) {
+        while (addCount-- > 0) {
             Node parent = nodesToDefine.pollFirst();
             Node leftChild = null;
             Node rightChild = null;
             int leftInt = in.nextInt();
             int rightInt = in.nextInt();
-            if(leftInt != -1) {
+            if (leftInt != -1) {
                 leftChild = new Node(leftInt);
                 nodesToDefine.add(leftChild);
             }
-            if(rightInt != -1) {
+            if (rightInt != -1) {
                 rightChild = new Node(rightInt);
                 nodesToDefine.add(rightChild);
             }
@@ -137,11 +137,11 @@ public class TreeTrieHacker {
         }
 
         int iterationCount = in.nextInt();
-        while(iterationCount-- > 0) {
+        while (iterationCount-- > 0) {
             int depthChange = in.nextInt();
             int mult = 1;
             LinkedList<Node> list = getNodesAtLevel(root, depthChange);
-            while(!list.isEmpty()) {
+            while (!list.isEmpty()) {
                 for (Node node : list) {
                     Node temp = node.left;
                     node.left = node.right;
@@ -155,7 +155,7 @@ public class TreeTrieHacker {
     }
 
     private static void preOrderPrint(Node root) {
-        if(root == null)
+        if (root == null)
             return;
         preOrderPrint(root.left);
         System.out.print(root.data + " ");
@@ -167,18 +167,18 @@ public class TreeTrieHacker {
         LinkedList<Node> retList = new LinkedList<>();
         int cur = 1;
         list.add(new AbstractMap.SimpleImmutableEntry<>(root, 1));
-        while(!list.isEmpty()) {
+        while (!list.isEmpty()) {
             AbstractMap.SimpleImmutableEntry<Node, Integer> current = list.removeFirst();
-            if(current.getValue() != cur)
+            if (current.getValue() != cur)
                 cur = current.getValue();
 
-            if(cur == level) {
+            if (cur == level) {
                 retList.add(current.getKey());
                 continue;
             }
-            if(current.getKey().left != null)
+            if (current.getKey().left != null)
                 list.add(new AbstractMap.SimpleImmutableEntry<>(current.getKey().left, current.getValue() + 1));
-            if(current.getKey().right != null)
+            if (current.getKey().right != null)
                 list.add(new AbstractMap.SimpleImmutableEntry<>(current.getKey().right, current.getValue() + 1));
         }
         return retList;
@@ -188,7 +188,8 @@ public class TreeTrieHacker {
         Integer data;
         Node left;
         Node right;
-        public Node(int i){
+
+        public Node(int i) {
             data = i;
         }
     }
