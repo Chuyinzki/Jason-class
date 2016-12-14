@@ -57,15 +57,6 @@ public class TreeTrieHacker {
         System.out.println("This took: " + (endTime - startTime) / 1000 + " seconds");
     }
 
-    private static int countEndings(TrieNode node) {
-        if (node.data == '*')
-            return 1;
-        int retCount = 0;
-        for (TrieNode n : node.children)
-            retCount += countEndings(n);
-        return retCount;
-    }
-
     public static void trie2() {
         Scanner in = new Scanner(System.in);
         int instructions = in.nextInt();
