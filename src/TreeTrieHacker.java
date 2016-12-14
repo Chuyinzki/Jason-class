@@ -8,12 +8,12 @@ import java.util.*;
 public class TreeTrieHacker {
 
     public static void main(String[] args) {
-        tree1();
+        trie1();
     }
 
     private static void trie1() {
-        long startTime = System.currentTimeMillis();
         Scanner in = new Scanner(System.in);
+        long startTime = System.currentTimeMillis();
         int instCount = in.nextInt();
         TrieNode root = new TrieNode(null);
 
@@ -33,6 +33,7 @@ public class TreeTrieHacker {
                         temp.children.add(node);
                         temp = temp.children.get(temp.children.indexOf(node));
                     }
+                    temp.childrenWords++;
                 }
                 int endIndex = temp.children.indexOf(new TrieNode('*'));
                 if (endIndex == -1)
@@ -49,7 +50,7 @@ public class TreeTrieHacker {
                         break;
                     }
                 }
-                System.out.println(print ? countEndings(temp) : 0);
+                System.out.println(print ? temp.childrenWords : 0);
             }
         }
         long endTime = System.currentTimeMillis();
@@ -106,6 +107,7 @@ public class TreeTrieHacker {
     public static class TrieNode {
         Character data;
         LinkedList<TrieNode> children;
+        int childrenWords = 0;
 
         public TrieNode(Character data) {
             this.data = data;

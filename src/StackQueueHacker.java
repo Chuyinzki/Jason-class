@@ -8,7 +8,7 @@ import java.util.Stack;
 public class StackQueueHacker {
 
     public static void main(String[] args) {
-        stacks6();
+        queue2();
     }
 
     private static void stacks1() {
@@ -211,21 +211,21 @@ public class StackQueueHacker {
         for (int i = 0; i < platesCount; i++)
             A.push(in.nextInt());
 
-        while(iteration < finalIteration) {
+        while (iteration < finalIteration) {
             Stack<Integer> b = new Stack<>();
             int prime = primes[iteration];
-            if(A.isEmpty()) {
-                while(!Atemp.isEmpty()) {
+            if (A.isEmpty()) {
+                while (!Atemp.isEmpty()) {
                     int plate = Atemp.pop();
-                    if(plate % prime == 0)
+                    if (plate % prime == 0)
                         b.push(plate);
                     else
                         A.push(plate);
                 }
             } else {
-                while(!A.isEmpty()) {
+                while (!A.isEmpty()) {
                     int plate = A.pop();
-                    if(plate % prime == 0)
+                    if (plate % prime == 0)
                         b.push(plate);
                     else
                         Atemp.push(plate);
@@ -235,14 +235,14 @@ public class StackQueueHacker {
             iteration++;
         }
 
-        for(Stack<Integer> stack : listOfStacks)
-            while(!stack.isEmpty())
+        for (Stack<Integer> stack : listOfStacks)
+            while (!stack.isEmpty())
                 System.out.println(stack.pop());
-        if(A.isEmpty())
-            while(!Atemp.isEmpty())
+        if (A.isEmpty())
+            while (!Atemp.isEmpty())
                 System.out.println(Atemp.pop());
         else
-            while(!A.isEmpty())
+            while (!A.isEmpty())
                 System.out.println(A.pop());
     }
 
@@ -287,27 +287,24 @@ public class StackQueueHacker {
         }
     }
 
-    /*private static void queue2() {
+    private static void queue2() {
         Scanner in = new Scanner(System.in);
         int sizeN = in.nextInt();
-        while (sizeN-- > 0) {
-            int instruction = in.nextInt();
-            if (instruction == 1) {
-                s1.push(in.nextInt());
-            } else if (instruction == 2) {
-                if (s2.empty())
-                    while (!s1.empty())
-                        s2.push(s1.pop());
-                s2.pop();
-            } else {
-                if (s2.empty())
-                    while (!s1.empty())
-                        s2.push(s1.pop());
-                System.out.println(s2.peek());
-            }
-        }
-    }*/
+        char[][] grid = new char[sizeN][sizeN];
 
+        for (int i = 0; i < sizeN; i++) {
+            String line = in.next();
+            for (int j = 0; j < sizeN; j++)
+                grid[j][i] = line.charAt(j);
+        }
+
+        int xOrig = in.nextInt();
+        int yOrig = in.nextInt();
+        int xDest = in.nextInt();
+        int yDest = in.nextInt();
+
+
+    }
 
 
 }

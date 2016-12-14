@@ -1,5 +1,3 @@
-import com.google.common.collect.TreeMultiset;
-
 import java.util.Scanner;
 import java.util.TreeSet;
 
@@ -9,7 +7,7 @@ import java.util.TreeSet;
 public class HeapHacker {
 
     public static void main(String[] args) {
-        heaps2();
+        heaps1();
     }
 
     private static void heaps1() {
@@ -29,7 +27,7 @@ public class HeapHacker {
         }
     }
 
-    private static void heaps2() {
+    /*private static void heaps2() {
         Scanner in = new Scanner(System.in);
         int numCookies = in.nextInt();
         int minSweetness = in.nextInt();
@@ -50,5 +48,5 @@ public class HeapHacker {
             computationCount++;
         }
         System.out.print(computationCount);
-    }
+    }*/
 }
