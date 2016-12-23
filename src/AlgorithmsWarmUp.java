@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class AlgorithmsWarmUp {
 
     public static void main(String[] args) {
-        timeConversion();
+        rotations();
     }
 
     private static void bigSum() {
@@ -80,5 +80,18 @@ public class AlgorithmsWarmUp {
         if ((timeOrig.charAt(8) == 'P' && h != 12) || (timeOrig.charAt(8) != 'P' && h == 12))
             h += 12;
         System.out.print(String.format("%02d:%02d:%02d", h % 24, m, s));
+    }
+
+    private static void rotations() {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        int k = in.nextInt();
+        int q = in.nextInt();
+
+        int[] arr = new int[n];
+        for(int i = 0; i < n; i++)
+            arr[i] = in.nextInt();
+        while(q-- > 0)
+            System.out.println(arr[(((in.nextInt() - k) % n) + n) % n]);
     }
 }
