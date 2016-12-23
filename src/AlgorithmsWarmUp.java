@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class AlgorithmsWarmUp {
 
     public static void main(String[] args) {
-        staircase();
+        timeConversion();
     }
 
     private static void bigSum() {
@@ -62,12 +62,23 @@ public class AlgorithmsWarmUp {
     private static void staircase() {
         Scanner in = new Scanner(System.in);
         int stairSize = in.nextInt();
-        for(int i = stairSize - 1; i >= 0; i--) {
+        for (int i = stairSize - 1; i >= 0; i--) {
             for (int j = i; j > 0; j--)
                 System.out.print(' ');
             for (int k = stairSize - i; k > 0; k--)
                 System.out.print('#');
             System.out.println();
         }
+    }
+
+    private static void timeConversion() {
+        Scanner in = new Scanner(System.in);
+        String timeOrig = in.next();
+        int h = Integer.parseInt(timeOrig.substring(0, 2));
+        int m = Integer.parseInt(timeOrig.substring(3, 5));
+        int s = Integer.parseInt(timeOrig.substring(6, 8));
+        if ((timeOrig.charAt(8) == 'P' && h != 12) || (timeOrig.charAt(8) != 'P' && h == 12))
+            h += 12;
+        System.out.print(String.format("%02d:%02d:%02d", h % 24, m, s));
     }
 }
