@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class AlgorithmsSorting {
 
     public static void main(String[] args) {
-        intro();
+        insertionSort1();
     }
 
     private static void intro() {
@@ -39,5 +39,30 @@ public class AlgorithmsSorting {
                 index = ((max = index) - min)/2;
 
         }*/
+    }
+
+    private static void insertionSort1() {
+        Scanner in = new Scanner(System.in);
+        int arrSize = in.nextInt();
+        int[] arr = new int[arrSize];
+        for(int i = 0; i < arr.length - 1; i++)
+            arr[i] = in.nextInt();
+        int toInsert = in.nextInt();
+        int i = arr.length;
+        while(i-- > 1) {
+            int leftNum = arr[i - 1];
+            if(leftNum < toInsert)
+                break;
+            arr[i] = leftNum;
+            printArr(arr);
+        }
+        arr[i] = toInsert;
+        printArr(arr);
+    }
+
+    private static void printArr(int[] arr) {
+        for(int i : arr)
+            System.out.print(i + " ");
+        System.out.println();
     }
 }
