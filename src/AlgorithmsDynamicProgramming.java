@@ -1,11 +1,13 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Created by jvillegas on 12/28/16.
  */
 public class AlgorithmsDynamicProgramming {
+
+    //I know retreating to a global variable is ugly, but I'm doing it anyways
+    static HashMap<AbstractMap.SimpleImmutableEntry<Integer, Integer>, Long> map = new HashMap<>();
+
     public static void main(String[] args) {
         coinProblem();
     }
@@ -14,28 +16,33 @@ public class AlgorithmsDynamicProgramming {
         Scanner in = new Scanner(System.in);
         int n = in.nextInt();
         int m = in.nextInt();
-        if(m == 0) {
+        if (m == 0) {
             System.out.print(0);
             return;
         }
         int[] ms = new int[m];
-        for(int i = 0; i < m; i++)
+        for (int i = 0; i < m; i++)
             ms[i] = in.nextInt();
         Arrays.sort(ms);
-        System.out.print(coinProblemHelper(0, n, new ArrayList<>(), ms, 0));
+        System.out.print(coinProblemHelper(n, ms, 0));
     }
 
-    private static int coinProblemHelper(int curCount, int n, ArrayList<Integer> curList, int[] ms, int curIter) {
-        if(curCount > n)
-            return 0;
-        if(curCount == n)
-            return 1;
-        int innerMatches = 0;
-        for(Integer i = curIter; i < ms.length; i++) {
-            Integer j = ms[i];
-            curList.add(j);
-            innerMatches += coinProblemHelper(curCount + j, n, curList, ms, i);
-            curList.remove(j);
+    private static Long coinProblemHelper(int n, int[] ms, int curIter) {
+        if (n < 0)
+            return 0L;
+        if (0 == n)
+            return 1L;
+        Long innerMatches = 0L;
+        for (Integer i = curIter; i < ms.length; i++) {
+            AbstractMap.SimpleImmutableEntry<Integer, Integer> entry =
+                    new AbstractMap.SimpleImmutableEntry<>(i, n);
+            Long count = map.get(entry);
+            if (count == null) {
+                Long reted = coinProblemHelper(n - ms[i], ms, i);
+                innerMatches += reted;
+                map.put(entry, reted);
+            } else
+                innerMatches += count;
         }
         return innerMatches;
     }
