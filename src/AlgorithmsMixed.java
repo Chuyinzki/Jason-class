@@ -6,7 +6,7 @@ import java.util.*;
 public class AlgorithmsMixed {
 
     public static void main(String[] args) {
-        manasaStones();
+        luckBalance();
     }
 
     public static void camelCase() {
@@ -330,24 +330,63 @@ public class AlgorithmsMixed {
     private static void manasaStones() {
         Scanner in = new Scanner(System.in);
         int cases = in.nextInt();
-        while(cases-- > 0) {
+        while (cases-- > 0) {
             int n = in.nextInt();
             int a = in.nextInt();
             int b = in.nextInt();
-            PriorityQueue<Integer> queue =  manasaStonesHelper(n, a, b);
-            while(!queue.isEmpty())
+            PriorityQueue<Integer> queue = manasaStonesHelper(n, a, b);
+            while (!queue.isEmpty())
                 System.out.print(queue.poll() + " ");
             System.out.println();
         }
     }
+
     private static PriorityQueue<Integer> manasaStonesHelper(int n, int a, int b) {
         PriorityQueue<Integer> ret = new PriorityQueue<>();
         n--;
-        for(int i = 0; i <= n; i++) {
+        for (int i = 0; i <= n; i++) {
             int calc = (a * i) + (b * (n - i));
-            if(!ret.contains(calc))
+            if (!ret.contains(calc))
                 ret.add(calc);
         }
         return ret;
     }
+
+    private static void strangeCounter() {
+        Scanner in = new Scanner(System.in);
+        long t = Long.parseLong(in.next());
+        long mult = 3;
+        while (mult - 2 < t) {
+            mult *= 2;
+        }
+        if (mult - 2 == t)
+            System.out.print(mult);
+        else {
+            mult /= 2;
+            System.out.print(mult - (t - (mult - 2)));
+        }
+    }
+
+    private static void luckBalance() {
+        Scanner in = new Scanner(System.in);
+        int lines = in.nextInt();
+        int losable = in.nextInt();
+        int ret = 0;
+        PriorityQueue<Integer> queue = new PriorityQueue<>();
+        while(lines-- > 0) {
+            int L = in.nextInt();
+            if(in.nextInt() == 0)
+                ret += L;
+            else
+                queue.add(L);
+        }
+
+        int win = 0;
+        while(queue.size() > losable)
+            win += queue.poll();
+        while(!queue.isEmpty())
+            ret += queue.poll();
+        System.out.print(ret - win);
+    }
+
 }
