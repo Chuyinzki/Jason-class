@@ -1,3 +1,4 @@
+import java.math.BigInteger;
 import java.util.*;
 
 /**
@@ -9,7 +10,7 @@ public class AlgorithmsDynamicProgramming {
     static HashMap<AbstractMap.SimpleImmutableEntry<Integer, Integer>, Long> map = new HashMap<>();
 
     public static void main(String[] args) {
-        coinProblem();
+        modifiedFib();
     }
 
     private static void coinProblem() {
@@ -45,5 +46,24 @@ public class AlgorithmsDynamicProgramming {
                 innerMatches += count;
         }
         return innerMatches;
+    }
+
+    private static void modifiedFib() {
+        Scanner in = new Scanner(System.in);
+        ArrayList<BigInteger> list = new ArrayList<>();
+        list.add(BigInteger.valueOf((long)in.nextInt()));
+        list.add(BigInteger.valueOf((long)in.nextInt()));
+        System.out.print(modifiedFibHelper(in.nextInt(), list));
+    }
+
+    private static BigInteger modifiedFibHelper(int desired, ArrayList<BigInteger> list) {
+        if (list.size() >= desired)
+            return list.get(desired - 1);
+        else {
+            BigInteger prev = list.get(list.size() - 1);
+            BigInteger prev2 = list.get(list.size() - 2);
+            list.add(prev.multiply(prev).add(prev2));
+            return modifiedFibHelper(desired, list);
+        }
     }
 }
