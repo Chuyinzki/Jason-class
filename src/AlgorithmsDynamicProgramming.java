@@ -66,4 +66,31 @@ public class AlgorithmsDynamicProgramming {
             return modifiedFibHelper(desired, list);
         }
     }
+
+    private static void maxSubArray() {
+        Scanner in = new Scanner(System.in);
+        int q = in.nextInt();
+        while(q-- > 0) {
+            int size = in.nextInt();
+            int[] arr = new int[size];
+            int nonContig = 0;
+            int max = Integer.MIN_VALUE;
+            for(int i = 0; i < size; i++) {
+                int cur = in.nextInt();
+                arr[i] = cur;
+                max = cur > max ? cur : max;
+                if (cur >= 0)
+                    nonContig += cur;
+            }
+            if(max <= 0) {
+                System.out.println(max + " " + max);
+                continue;
+            }
+            System.out.println(nonContig + " " + getMaxSubArray(0, arr.length, arr));
+        }
+    }
+
+    private static int getMaxSubArray(int s, int f, int[] arr) {
+        return 1;
+    }
 }

@@ -1,3 +1,4 @@
+import java.math.BigInteger;
 import java.util.*;
 
 /**
@@ -6,7 +7,7 @@ import java.util.*;
 public class AlgorithmsMixed {
 
     public static void main(String[] args) {
-        luckBalance();
+        factorial();
     }
 
     public static void camelCase() {
@@ -373,20 +374,113 @@ public class AlgorithmsMixed {
         int losable = in.nextInt();
         int ret = 0;
         PriorityQueue<Integer> queue = new PriorityQueue<>();
-        while(lines-- > 0) {
+        while (lines-- > 0) {
             int L = in.nextInt();
-            if(in.nextInt() == 0)
+            if (in.nextInt() == 0)
                 ret += L;
             else
                 queue.add(L);
         }
 
         int win = 0;
-        while(queue.size() > losable)
+        while (queue.size() > losable)
             win += queue.poll();
-        while(!queue.isEmpty())
+        while (!queue.isEmpty())
             ret += queue.poll();
         System.out.print(ret - win);
+    }
+
+    /*private static void abbreviation() { fml
+        Scanner in = new Scanner(System.in);
+        int q = in.nextInt();
+        while(q-- > 0) {
+            String a = in.next();
+            String b = in.next();
+
+            int iter = 0;
+            int matched = 0;
+            boolean hitUpper = false;
+            char lastMatched = '%';
+            for(int i = 0; i < b.length(); i++) {
+                char toFind = b.charAt(i);
+                for(int j = iter; j < a.length(); j++, iter++) {
+                    char c = a.charAt(j);
+
+                    if(Character.isUpperCase(c) && c != toFind) {
+                        if(hitUpper) {
+                            i = b.length();
+                            break;
+                        } else {
+                            hitUpper = true;
+                            i = -1;
+                            break;
+                        }
+                    }
+                    if(Character.isUpperCase(c))
+                        hitUpper = true;
+
+                    if (Character.toUpperCase(c) == toFind) {
+                        matched++;
+                        iter++;
+                        break;
+                    }
+                }
+            }
+
+            boolean noMoreUppers = true;
+            for(int k = iter; k < a.length(); k++)
+                if(Character.isUpperCase(a.charAt(k))) {
+                    noMoreUppers = false;
+                    break;
+                }
+            System.out.println(noMoreUppers && matched == b.length() ? "YES" : "NO");
+        }
+    }*/
+
+    private static void utopianTree() {
+        Scanner in = new Scanner(System.in);
+        int q = in.nextInt();
+
+        while(q-- > 0) {
+            int cycles = in.nextInt();
+            int height = 1;
+
+            boolean spring = true;
+            while(cycles-- > 0) {
+                if(spring) {
+                    height *= 2;
+                    spring = false;
+                } else {
+                    height += 1;
+                    spring = true;
+                }
+            }
+            System.out.println(height);
+        }
+    }
+
+    private static void classCancellation() {
+        Scanner in = new Scanner(System.in);
+        int q = in.nextInt();
+
+        while(q-- > 0) {
+            int students = in.nextInt();
+            int thresh = in.nextInt();
+
+            int onTime = 0;
+            while(students-- > 0)
+                onTime += in.nextInt() > 0 ? 0 : 1;
+            System.out.println(onTime >= thresh ? "NO" : "YES");
+        }
+    }
+
+    private static void factorial() {
+        Scanner in = new Scanner(System.in);
+        int q = in.nextInt();
+        BigInteger cur = BigInteger.valueOf((long) q);
+        while(q-- > 1)
+            cur = cur.multiply(BigInteger.valueOf((long) q));
+        System.out.print(cur);
     }
 
 }
