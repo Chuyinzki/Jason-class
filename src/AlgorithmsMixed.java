@@ -7,7 +7,7 @@ import java.util.*;
 public class AlgorithmsMixed {
 
     public static void main(String[] args) {
-        factorial();
+        insertionSortPart2();
     }
 
     public static void camelCase() {
@@ -481,6 +481,37 @@ public class AlgorithmsMixed {
         while(q-- > 1)
             cur = cur.multiply(BigInteger.valueOf((long) q));
         System.out.print(cur);
+    }
+
+    private static void insertionSortPart2(){
+        Scanner in = new Scanner(System.in);
+        int s = in.nextInt();
+        int[] ar = new int[s];
+        for(int i=0;i<s;i++)
+            ar[i]=in.nextInt();
+
+        for(int j = 1; j < ar.length; j++) {
+            int iter = j;
+            int k = iter - 1;
+            while(k >= 0) {
+                int jth = ar[iter];
+                int kth = ar[k];
+                if(kth > jth) {
+                    ar[k] = jth;
+                    ar[iter] = kth;
+                    k--;
+                    iter--;
+                } else
+                    break;
+            }
+            printArray(ar);
+        }
+
+    }
+    private static void printArray(int[] ar) {
+        for(int n: ar)
+            System.out.print(n+" ");
+        System.out.println("");
     }
 
 }
