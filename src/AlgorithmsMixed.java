@@ -534,8 +534,8 @@ public class AlgorithmsMixed {
         for (int i = !isNeg ? 0 : 1; i < string.length(); i++) {
             double multer = Math.pow(10.0, (double) string.length() - i - 1);
             try {
-                ret = !isNeg ? Math.addExact(ret, Math.multiplyExact((int) multer, (string.charAt(i) - '0')))
-                        : Math.subtractExact(ret, Math.multiplyExact((int) multer, (string.charAt(i) - '0')));
+                int multRes = Math.multiplyExact((int) multer, (string.charAt(i) - '0'));
+                ret = !isNeg ? Math.addExact(ret, multRes) : Math.subtractExact(ret, multRes);
             } catch (ArithmeticException e) {
                 throw new Exception("Yo, that number is not in the integer range.");
             }
