@@ -7,7 +7,7 @@ import java.util.*;
 public class AlgorithmsMixed {
 
     public static void main(String[] args) throws Exception {
-        String num = "2348309";
+        String num = "" + (((long) Integer.MAX_VALUE) + 1);
         System.out.println("Parsing \"" + num + "\" : " + parseInt(num));
     }
 
@@ -534,12 +534,13 @@ public class AlgorithmsMixed {
         for (int i = !isNeg ? 0 : 1; i < string.length(); i++) {
             double multer = Math.pow(10.0, (double) string.length() - i - 1);
             try {
-                ret += Math.multiplyExact((long) multer, (string.charAt(i) - '0'));
+                ret = !isNeg ? Math.addExact(ret, Math.multiplyExact((int) multer, (string.charAt(i) - '0')))
+                        : Math.subtractExact(ret, Math.multiplyExact((int) multer, (string.charAt(i) - '0')));
             } catch (ArithmeticException e) {
-                throw new Exception("Yo, that number is too large");
+                throw new Exception("Yo, that number is not in the integer range.");
             }
         }
-        return isNeg ? -1 * ret : ret;
+        return ret;
     }
 
 }
