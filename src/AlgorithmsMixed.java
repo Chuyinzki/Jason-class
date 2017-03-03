@@ -6,8 +6,9 @@ import java.util.*;
  */
 public class AlgorithmsMixed {
 
-    public static void main(String[] args) {
-        insertionSortPart2();
+    public static void main(String[] args) throws Exception {
+        String num = "2348309";
+        System.out.println("Parsing \"" + num + "\" : " + parseInt(num));
     }
 
     public static void camelCase() {
@@ -441,13 +442,13 @@ public class AlgorithmsMixed {
         Scanner in = new Scanner(System.in);
         int q = in.nextInt();
 
-        while(q-- > 0) {
+        while (q-- > 0) {
             int cycles = in.nextInt();
             int height = 1;
 
             boolean spring = true;
-            while(cycles-- > 0) {
-                if(spring) {
+            while (cycles-- > 0) {
+                if (spring) {
                     height *= 2;
                     spring = false;
                 } else {
@@ -463,12 +464,12 @@ public class AlgorithmsMixed {
         Scanner in = new Scanner(System.in);
         int q = in.nextInt();
 
-        while(q-- > 0) {
+        while (q-- > 0) {
             int students = in.nextInt();
             int thresh = in.nextInt();
 
             int onTime = 0;
-            while(students-- > 0)
+            while (students-- > 0)
                 onTime += in.nextInt() > 0 ? 0 : 1;
             System.out.println(onTime >= thresh ? "NO" : "YES");
         }
@@ -478,25 +479,25 @@ public class AlgorithmsMixed {
         Scanner in = new Scanner(System.in);
         int q = in.nextInt();
         BigInteger cur = BigInteger.valueOf((long) q);
-        while(q-- > 1)
+        while (q-- > 1)
             cur = cur.multiply(BigInteger.valueOf((long) q));
         System.out.print(cur);
     }
 
-    private static void insertionSortPart2(){
+    private static void insertionSortPart2() {
         Scanner in = new Scanner(System.in);
         int s = in.nextInt();
         int[] ar = new int[s];
-        for(int i=0;i<s;i++)
-            ar[i]=in.nextInt();
+        for (int i = 0; i < s; i++)
+            ar[i] = in.nextInt();
 
-        for(int j = 1; j < ar.length; j++) {
+        for (int j = 1; j < ar.length; j++) {
             int iter = j;
             int k = iter - 1;
-            while(k >= 0) {
+            while (k >= 0) {
                 int jth = ar[iter];
                 int kth = ar[k];
-                if(kth > jth) {
+                if (kth > jth) {
                     ar[k] = jth;
                     ar[iter] = kth;
                     k--;
@@ -508,10 +509,37 @@ public class AlgorithmsMixed {
         }
 
     }
+
     private static void printArray(int[] ar) {
-        for(int n: ar)
-            System.out.print(n+" ");
+        for (int n : ar)
+            System.out.print(n + " ");
         System.out.println("");
+    }
+
+    private static void hackerlandRadioTransmitters() {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        int k = in.nextInt();
+        int[] x = new int[n];
+        for (int x_i = 0; x_i < n; x_i++) {
+            x[x_i] = in.nextInt();
+        }
+    }
+
+    private static int parseInt(String string) throws Exception {
+        int ret = 0;
+        boolean isNeg = false;
+        if (string.charAt(0) == '-')
+            isNeg = true;
+        for (int i = !isNeg ? 0 : 1; i < string.length(); i++) {
+            double multer = Math.pow(10.0, (double) string.length() - i - 1);
+            try {
+                ret += Math.multiplyExact((long) multer, (string.charAt(i) - '0'));
+            } catch (ArithmeticException e) {
+                throw new Exception("Yo, that number is too large");
+            }
+        }
+        return isNeg ? -1 * ret : ret;
     }
 
 }
